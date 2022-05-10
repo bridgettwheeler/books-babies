@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  resources :appointments
-  resources :books
   namespace :api do
-    resources :recipes, only: [:index, :create]
+    resources :appointments
+    resources :books, only: [:index, :show, :create]
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"

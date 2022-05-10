@@ -1,4 +1,4 @@
-class AppointmentsController < ApplicationController
+class Api::AppointmentsController < ApplicationController
     def index
         render json: Appointment.all
       end
@@ -6,6 +6,14 @@ class AppointmentsController < ApplicationController
       def create
         appointment = @current_user.appointments.create!(appointment_params)
         render json: appointment, status: :created
+      end
+
+      def show
+        render json: @current_user
+      end
+
+      def destroy
+
       end
     
       private
