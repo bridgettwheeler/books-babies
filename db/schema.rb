@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_193805) do
+ActiveRecord::Schema.define(version: 2022_05_10_165431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "appointments", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "user_id"
+    t.string "book_id"
+    t.datetime "date_of_reading"
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
+    t.string "author"
+    t.string "image_url"
+    t.string "summary"
+  end
 
   create_table "recipes", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -28,10 +45,9 @@ ActiveRecord::Schema.define(version: 2021_06_03_193805) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
-    t.string "image_url"
-    t.string "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "email"
   end
 
   add_foreign_key "recipes", "users"
