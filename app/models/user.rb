@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  has_many :appointments
+  has_many :appointments, dependent: :destroy
   has_many :books, through: :appointments
+  has_many :created_books, class_name: "Book", dependent: :destroy
   
   has_secure_password
 
