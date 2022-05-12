@@ -1,7 +1,7 @@
 class Api::BooksController < ApplicationController
     def index
-        render json: Book.all
-      end
+      books = Book.all 
+    end
     
       def create
         book = @current_user.books.create!(book_params)

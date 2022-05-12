@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import ReactMarkdown from "react-markdown";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 
 function NewAppointment({ user }) {
@@ -31,12 +30,12 @@ function NewAppointment({ user }) {
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch("/api/books", {
+    fetch("/api/create-book-appointment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(book)
+      body: JSON.stringify({book, appointment})
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
@@ -55,7 +54,7 @@ function NewAppointment({ user }) {
           <FormField>
             <Label htmlFor="title">Title</Label>
             <Input
-              onChange={handleChange}
+              onChange={e => setBook({...book, [e.target.name]: e.target.value})}
               name="title"
               type="text"
               id="title"
@@ -65,7 +64,7 @@ function NewAppointment({ user }) {
           <FormField>
             <Label htmlFor="author">Author</Label>
             <Input
-              onChange={handleChange}
+              onChange={e => setBook({...book, [e.target.name]: e.target.value})}
               name="author"
               id="author"
               value={book.author}
@@ -74,7 +73,7 @@ function NewAppointment({ user }) {
           <FormField>
             <Label htmlFor="book_img">Book Image</Label>
             <Input
-              onChange={handleChange}
+              onChange={e => setBook({...book, [e.target.name]: e.target.value})}
               name="book_img"
               type="image"
               id="book_img"
@@ -84,20 +83,20 @@ function NewAppointment({ user }) {
           <FormField>
             <Label htmlFor="summary">Summary</Label>
             <Input
-              onChange={handleChange}
+              onChange={e => setBook({...book, [e.target.name]: e.target.value})}
               name="summary"
               type="text"
               id="summary"
-              value={summary}
+              value={book.summary}
             />
           </FormField>
           <h2>Second, select a date to volunteer to read</h2>
           <FormField>
             <Label htmlFor="date_of_reading">Date</Label>
             <Input
-              onChange={handleChange}
+              onChange={ e => setAppointment({...appointment, [e.target.name]: e.target.value})}
               name="date_of_reading"
-              type="datetime"
+              type="datetime-local"
               id="date_of_reading"
               value={appointment.date_of_reading}
             />

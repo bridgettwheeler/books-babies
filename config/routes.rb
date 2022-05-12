@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
   namespace :api do
     resources :appointments
-    resources :books, only: [:index, :show, :create]
+    resources :books, only: [:index, :show] do
+      # nested resource for appointments
+      resources :appointments, only: [:show, :create]
+    end
     post "/signup", to: "users#create"
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
-  end
+    post "/create-book-appointment", to: "appointments#create"
+    end
   # all other routes will be load our React application
   # this route definition matches:
   # - *path: all paths not matched by one of the routes defined above

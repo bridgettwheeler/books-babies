@@ -1,11 +1,23 @@
 class Api::AppointmentsController < ApplicationController
     def index
-        render json: Appointment.all
+      if params[:book_id]
+        book = Book.find(params[:book_id])
+        appointments = book.appointments
+      else
+        appointments = Appointment.all
+      end
+      render json: appointments, include: :book
       end
     
       def create
-        appointment = @current_user.appointments.create!(appointment_params)
-        render json: appointment, status: :created
+        
+        book = @current_user.created_books.find_or_create_by!(title: params[:book][:title]) do |book| 
+          book.author = params[:book][:author]
+          book.image_url = params[:book][:image_url]
+          book.summary = params[:book][:summary]
+        end
+        appointment = @current_user.appointments.create!(book:book, date_of_reading: params[:appointment][:date_of_reading])
+        render json: appointment, include: :book, status: :created
       end
 
       def show
@@ -15,10 +27,18 @@ class Api::AppointmentsController < ApplicationController
       def destroy
 
       end
+
     
       private
     
       def appointment_params
-        params.permit(:user_id, :book_id, :date_of_reading)
+        params.require(:appointment).permit(:book_id, :date_of_reading)
+
       end
+
+      def book_params
+        params.require(:book).permit(:title, :author, :image_url, :summary)
+      end
+
+      
 end

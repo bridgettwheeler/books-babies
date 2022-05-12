@@ -9,27 +9,27 @@ function AppointmentList({ user }) {
   useEffect(() => {
     fetch("/api/appointments")
       .then((r) => r.json())
-      .then(setAppointments);
+      .then(data => setAppointments(data));
   }, []);
 
   
 
   return (
     <Wrapper>
-      {appointmentss.length > 0 ? (
+      {appointments.length > 0 ? (
         appointments.map((appointment) => (
-          <Appointment key={appointment.id}>
+          //<Appointment key={appointment.id}>
             <Box>
               <h2>{appointment.date_of_reading}</h2>
               <p>
-              <h3>Reader: {user.user_name}</h3>
-              <h3>Book: {book.title}</h3>
-              <h3>By: {book.author}</h3>
-              <h3> {book.image_url}</h3>
-              <h3> {book.summary}</h3>
+              <h3>Reader: {appointment.user.username}</h3>
+              <h3>Book: {appointment.book.title}</h3>
+              <h3>By: {appointment.book.author}</h3>
+              <img src={appointment.book.image_url}/> 
+              <h3> {appointment.book.summary}</h3>
               </p>
             </Box>
-          </Appointment>
+          //</Appointment>
         ))
       ) : (
         <>
