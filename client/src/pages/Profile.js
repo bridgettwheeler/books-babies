@@ -1,15 +1,7 @@
-import React, {useContext} from 'react'
-import {UserContext} from "../context/user"
-
-const Profile = () => {
-    const {user} = useContext(UserContext)
+function Profile({ user, setUser }) {
     
-    return (
-        <div>
-            <h2>{user.username} Profile</h2>
-            <h4>{user.email}</h4>
-        </div>
-    )
-}
+  return (
+      
+  )
 
-export default Profile
+export default Profile;
