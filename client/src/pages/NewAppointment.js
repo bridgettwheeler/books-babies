@@ -49,7 +49,7 @@ function NewAppointment({ user }) {
   return (
     <Wrapper>
       <WrapperChild>
-        <h2>First, tell us about the book you would like to read</h2>
+        <h3>Tell us about the book you plan to read or choose one from our library and we will be sure to have it waiting for you:</h3>
         <form onSubmit={handleSubmit}>
           <FormField>
             <Label htmlFor="title">Title</Label>
@@ -90,7 +90,7 @@ function NewAppointment({ user }) {
               value={book.summary}
             />
           </FormField>
-          <h2>Second, select a date to volunteer to read</h2>
+          <h3>Select a date and time to read:</h3>
           <FormField>
             <Label htmlFor="date_of_reading">Date</Label>
             <Input

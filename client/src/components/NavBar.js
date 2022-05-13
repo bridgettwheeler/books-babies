@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "../styles";
+import { NavLink } from "react-router-dom"
 
 function NavBar({ user, setUser }) {
   function handleLogoutClick() {
@@ -14,19 +15,48 @@ function NavBar({ user, setUser }) {
 
   return (
     <Wrapper>
-      <Logo>
-        <Link to="/">Reciplease</Link>
-      </Logo>
+      <NavLink activeStyle={{
+                fontWeight: "bolder",
+                color: "white"
+            }}
+                exact
+                style={style}
+                to="/"
+            >Schedule</NavLink>
+      <NavLink activeStyle={{
+                fontWeight: "bolder",
+                color: "white"
+            }}
+                exact
+                style={style}
+                to="/new"
+            >Sign Up to Read</NavLink>
+      <NavLink activeStyle={{
+                fontWeight: "bolder",
+                color: "white"
+            }}
+                exact
+                style={style}
+                to="/profile"
+            >Profile</NavLink>
       <Nav>
-        <Button as={Link} to="/new">
-          New Recipe
-        </Button>
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout
         </Button>
       </Nav>
     </Wrapper>
   );
+}
+
+const style = {
+  width: "60%",
+  margin: "5% 0 1%",
+  padding: "1em",
+  textDecoration: "none",
+  color: "purple",
+  backgroundColor: "orange",
+  fontWeight: "bold",
+  verticleAlign: "center"
 }
 
 const Wrapper = styled.header`
@@ -37,9 +67,9 @@ const Wrapper = styled.header`
 `;
 
 const Logo = styled.h1`
-  font-family: "Permanent Marker", cursive;
-  font-size: 3rem;
-  color: deeppink;
+  font-family: "Arial";
+  font-size: 2rem;
+  color: Orange;
   margin: 0;
   line-height: 1;
 
