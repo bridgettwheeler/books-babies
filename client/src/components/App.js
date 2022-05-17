@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "../pages/Login";
-import AppointmentList from "../pages/AppointmentList";
 import NewAppointment from "../pages/NewAppointment";
+import Schedule from "../pages/Schedule";
+import Profile from "../pages/Profile";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,8 +28,11 @@ function App() {
           <Route path="/new">
             <NewAppointment user={user} />
           </Route>
+          <Route path="/profile">
+            <Profile user={user} />
+          </Route>
           <Route path="/">
-            <AppointmentList />
+            <Schedule />
           </Route>
         </Switch>
       </main>
