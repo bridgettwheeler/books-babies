@@ -1,11 +1,12 @@
-import AppointmentsList from "../AppointmentsList";
+import AppointmentsContainer from "../containers/AppointmentsContainer";
 
-const Schedule = () => {
+const Schedule = ({user}) => {
     
     return (
         <div>
             <h1>Schedule:</h1>
-            <AppointmentsList />
+            <AppointmentsContainer user={user}/>
+
         </div>
             
     

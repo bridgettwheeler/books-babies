@@ -1,32 +1,9 @@
+import React, { useEffect, useState } from "react";
 
-
-const AppointmentCard = () => {
-    const [appointments, setAppointments] = useState([])
+const AppointmentCard = ({appointment, user, handleClick}) => {
     
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const resp = await fetch("/api/appointments")
-                const data = await resp.json()
-                setAppointments(data)
-            } catch (error) {
-                alert(error)
-            }
-        }
-      fetchData()
-},[]);
-
-
-    const handleClick = e => {
-        const fetchData = async () => {
-            const resp = await fetch("api/appointments/:id", {
-                method: "DELETE",
-            })     
-                const data = await resp.json()
-                setAppointments(currentAppointments => currentAppointments.filter(appointmentObj=> appointmentObj.id !== appointment.id))
-    }
-      fetchData()
-    };
+    
+    
 
     // need a handle click that patches to edit appointment
 
@@ -39,11 +16,11 @@ const AppointmentCard = () => {
             <h2>{appointment.book.author}</h2>
             <h2>{appointment.book.book_image}</h2>
             <h2>{appointment.book.summary}</h2>
-            <button onClick={handleClick}>Delete Appointment</button>
+            {appointment.user.id === user.id ?<button onClick={() => handleClick(appointment.id)}>Delete Appointment</button> : null}
             {/* <button onClick={handleClick}>Edit Appointment</button> */}
         </div>
     )
 }
   
 
-export default AppointmentCard
+export default AppointmentCard;

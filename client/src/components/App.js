@@ -32,7 +32,7 @@ function App() {
             <Profile user={user} />
           </Route>
           <Route path="/">
-            <Schedule />
+            <Schedule user={user}/>
           </Route>
         </Switch>
       </main>
