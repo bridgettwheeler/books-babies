@@ -49,10 +49,10 @@ function NewAppointment({ user }) {
   return (
     <Wrapper>
       <WrapperChild>
-        <h3>Tell us about the book you plan to read or choose one from our library and we will be sure to have it waiting for you:</h3>
+        <h1>Sign Up to Read a Book:</h1>
         <form onSubmit={handleSubmit}>
           <FormField>
-            <Label htmlFor="title">Title</Label>
+            <Label htmlFor="title">Title of Book</Label>
             <Input
               onChange={e => setBook({...book, [e.target.name]: e.target.value})}
               name="title"
@@ -70,7 +70,7 @@ function NewAppointment({ user }) {
               value={book.author}
             />
           </FormField>
-          <FormField>
+          {/* <FormField>
             <Label htmlFor="book_img">Book Image</Label>
             <Input
               onChange={e => setBook({...book, [e.target.name]: e.target.value})}
@@ -79,7 +79,7 @@ function NewAppointment({ user }) {
               id="book_img"
               value={book.image_url}
             />
-          </FormField>
+          </FormField> */}
           <FormField>
             <Label htmlFor="summary">Summary</Label>
             <Input
@@ -90,7 +90,6 @@ function NewAppointment({ user }) {
               value={book.summary}
             />
           </FormField>
-          <h3>Select a date and time to read:</h3>
           <FormField>
             <Label htmlFor="date_of_reading">Date</Label>
             <Input

@@ -10,16 +10,30 @@ const AppointmentCard = ({appointment, user, handleClick}) => {
     
     return (
         <div>
-            <h1>{appointment.date_of_reading}</h1>
-            <h2>{appointment.user.username}</h2>
-            <h2>{appointment.book.title}</h2>
-            <h2>{appointment.book.author}</h2>
-            <h2>{appointment.book.book_image}</h2>
-            <h2>{appointment.book.summary}</h2>
+            <h2>{appointment.date_of_reading}</h2>
+            <h3>Reader: {appointment.user.username}</h3>
+            <h3>Book: {appointment.book.title}</h3>
+            <h3>Author: {appointment.book.author}</h3>
+            <h3>{appointment.book.book_image}</h3>
+            <h3 style={style}>{appointment.book.summary}</h3>
             {appointment.user.id === user.id ?<button onClick={() => handleClick(appointment.id)}>Delete Appointment</button> : null}
             {/* <button onClick={handleClick}>Edit Appointment</button> */}
+            <br></br>
         </div>
     )
+}
+
+const style = {
+    fontStyle: "italic",
+    font: "arial",
+    fontWeight: "normal"
+  }
+
+const fields = {
+    fontStyle: "normal",
+    font: "arial",
+    fontWeight: "normal"
+
 }
   
 
