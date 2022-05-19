@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import NewAppointment from "../pages/NewAppointment";
 import Schedule from "../pages/Schedule";
 import Profile from "../pages/Profile";
+import EditAppointmentForm from "../pages/EditAppointmentForm";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,6 +26,9 @@ function App() {
       <NavBar user={user} setUser={setUser} />
       <main>
         <Switch>
+          <Route path="/appointments/:id/edit">
+            <EditAppointmentForm user={user} />
+          </Route>
           <Route path="/new">
             <NewAppointment user={user} />
           </Route>

@@ -20,9 +20,14 @@ const AppointmentsContainer = ({user}) => {
             setAppointments(currentAppointments => currentAppointments.filter(appointmentObj=> appointmentObj.id !== id))
 }
 
+    const handleEdit = id => {
+        
+    }     
+        
+
   return (
     <div>
-        <AppointmentsList user={user} appointments={appointments} handleClick={handleClick}/>
+        <AppointmentsList user={user} appointments={appointments} handleClick={handleClick} handleEdit={handleEdit}/>
     </div>
   )
 }

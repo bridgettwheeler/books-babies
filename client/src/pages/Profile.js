@@ -1,12 +1,24 @@
-import AppointmentsContainer from "../containers/AppointmentsContainer";
+import AppointmentCard from "../components/AppointmentCard";
+import { useHistory } from "react-router";
 
 function Profile({user, appointments}) {
+
+    const history = useHistory()
+
+    const handleClick = id => {
+        fetch(`api/appointments/${id}`, {
+            method: "DELETE",
+        }) 
+        .then( () => history.push("/"))
+            
+}
     
   return (
       <div>
-          <h1>YOUR SCHEDULED READINGS:</h1>
-          {/* {appointments.map(appointment => appointment.user.id === user.id ? <AppointmentsContainer key={appointment.id} user={user} />  : "You have no scheduled readings.")} */}
+          <h2>Your Scheduled Readings:</h2>
+          {user.appointments.map(appointment => <AppointmentCard key={appointment.id} user={user} appointment={appointment} handleClick={handleClick}/>)}
            <button>Delete Account</button> 
+           <p>Please note, selecting to delete your account will also delete all associated reading appointments.</p>
       </div>
      
   )

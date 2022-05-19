@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const AppointmentCard = ({appointment, user, handleClick}) => {
+const AppointmentCard = ({appointment, user, handleClick, handleEdit}) => {
     
     
     
@@ -17,7 +18,7 @@ const AppointmentCard = ({appointment, user, handleClick}) => {
             <h3>{appointment.book.book_image}</h3>
             <h3 style={style}>{appointment.book.summary}</h3>
             {appointment.user.id === user.id ?<button onClick={() => handleClick(appointment.id)}>Delete Appointment</button> : null}
-            {/* <button onClick={handleClick}>Edit Appointment</button> */}
+            {appointment.user.id === user.id ?<Link to={`/appointments/${appointment.id}/edit`}><button >Edit Appointment</button></Link> : null}
             <br></br>
         </div>
     )
