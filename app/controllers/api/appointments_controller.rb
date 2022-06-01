@@ -24,6 +24,11 @@ class Api::AppointmentsController < ApplicationController
         render json: @current_user
       end
 
+      def update
+        appointment = Appointment.find_by(id:params[:id])
+        appointment.update 
+      end
+
       def destroy
         appointment = Appointment.find_by(id: params[:id])
         appointment.destroy

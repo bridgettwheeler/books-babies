@@ -29,6 +29,14 @@ function NavBar({ user, setUser }) {
             }}
                 exact
                 style={style}
+                to="/books"
+            >Library</NavLink>
+      <NavLink activeStyle={{
+                fontWeight: "bolder",
+                color: "white"
+            }}
+                exact
+                style={style}
                 to="/new"
             >Sign Up to Read</NavLink>
       <NavLink activeStyle={{

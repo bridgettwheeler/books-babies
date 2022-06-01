@@ -6,6 +6,7 @@ import NewAppointment from "../pages/NewAppointment";
 import Schedule from "../pages/Schedule";
 import Profile from "../pages/Profile";
 import EditAppointmentForm from "../pages/EditAppointmentForm";
+import Books from "../pages/Books";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path="/new">
             <NewAppointment user={user} />
+          </Route>
+          <Route path="/books">
+            <Books user={user} />
           </Route>
           <Route path="/profile">
             <Profile user={user} />
