@@ -56,6 +56,7 @@ const EditAppointmentForm = ({ user }) => {
             <Input
               onChange={e => setBook({...book, [e.target.name]: e.target.value})}
               name="title"
+              // placeholder={}
               type="text"
               id="title"
               value={book.title}

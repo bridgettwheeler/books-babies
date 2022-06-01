@@ -26,7 +26,7 @@ class Api::AppointmentsController < ApplicationController
 
       def update
         appointment = Appointment.find_by(id:params[:id])
-        appointment.update 
+        appointment.update(appointment_params)
       end
 
       def destroy
