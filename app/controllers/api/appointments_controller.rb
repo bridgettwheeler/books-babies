@@ -21,12 +21,21 @@ class Api::AppointmentsController < ApplicationController
       end
 
       def show
-        render json: @current_user
+        appointment = Appointment.find_by(id:params[:id])
+        if appointment
+        render json: appointment
+        else
+          render json: "No appointment found"
+        end
       end
 
       def update
         appointment = Appointment.find_by(id:params[:id])
-        appointment.update(appointment_params)
+        if appointment&.update(appointment_params)
+        render json: appointment
+        else
+          render json: {errors: appointment.errors.full_messages.to_sentence}
+        end
       end
 
       def destroy

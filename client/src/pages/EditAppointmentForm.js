@@ -1,49 +1,42 @@
-import { useState } from "react";
-import { useHistory } from "react-router";
+import { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
 import styled from "styled-components";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 
 const EditAppointmentForm = ({ user }) => {
-  const [book, setBook] = useState({
-    title: "",
-    author: "",
-    image_url: "",
-    summary: "",
-  })
-
+  
+  const [errors, setErrors] = useState([])
+  const {id} = useParams()
+  const history = useHistory()
   const [appointment, setAppointment] = useState({
     date_of_reading: "",
   
   })
-
-  const handleChange = (e) => {
-    setBook({
-    ...book,
-    [e.target.name]: e.target.value
-    })
-}
-
-  const [errors, setErrors] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const history = useHistory();
-
+ useEffect(() => {
+   fetch(`/api/appointments/${id}`)
+   .then(resp => resp.json())
+   .then(appt => setAppointment({date_of_reading: appt.date_of_reading})) 
+ }, [id])
+ 
+  
   function handleSubmit(e) {
     e.preventDefault();
-    setIsLoading(true);
-    fetch("/api/create-book-appointment", {
+    fetch(`/api/appointments/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({book, appointment})
-    }).then((r) => {
-      setIsLoading(false);
-      if (r.ok) {
-        history.push("/");
-      } else {
-        r.json().then((err) => setErrors(err.errors));
-      }
-    });
+      body: JSON.stringify(appointment)
+    })
+      .then(resp => {
+        if (resp.ok){
+          resp.json().then(()=> history.push("/schedule"))
+
+        } else {
+          resp.json().then((error)=> setErrors(error))
+        }
+        
+      })
   }
 
   return (
@@ -51,46 +44,10 @@ const EditAppointmentForm = ({ user }) => {
       <WrapperChild>
         <h1>Edit your reading appointment:</h1>
         <form onSubmit={handleSubmit}>
-          <FormField>
-            <Label htmlFor="title">Title of Book</Label>
-            <Input
-              onChange={e => setBook({...book, [e.target.name]: e.target.value})}
-              name="title"
-              // placeholder={}
-              type="text"
-              id="title"
-              value={book.title}
-            />
-          </FormField>
-          <FormField>
-            <Label htmlFor="author">Author</Label>
-            <Input
-              onChange={e => setBook({...book, [e.target.name]: e.target.value})}
-              name="author"
-              id="author"
-              value={book.author}
-            />
-          </FormField>
-          {/* <FormField>
-            <Label htmlFor="book_img">Book Image</Label>
-            <Input
-              onChange={e => setBook({...book, [e.target.name]: e.target.value})}
-              name="book_img"
-              type="image"
-              id="book_img"
-              value={book.image_url}
-            />
-          </FormField> */}
-          <FormField>
-            <Label htmlFor="summary">Summary</Label>
-            <Input
-              onChange={e => setBook({...book, [e.target.name]: e.target.value})}
-              name="summary"
-              type="text"
-              id="summary"
-              value={book.summary}
-            />
-          </FormField>
+          
+          
+          
+          
           <FormField>
             <Label htmlFor="date_of_reading">Date</Label>
             <Input
@@ -103,7 +60,7 @@ const EditAppointmentForm = ({ user }) => {
           </FormField>
           <FormField>
             <Button color="primary" type="submit">
-              {isLoading ? "Loading..." : "Add Appointment"}
+              Edit Appointment
             </Button>
           </FormField>
           <FormField>
