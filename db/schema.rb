@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2022_05_10_231437) do
   create_table "appointments", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "user_id"
-    t.string "book_id"
+    t.integer "user_id"
+    t.integer "book_id"
     t.datetime "date_of_reading"
   end
 

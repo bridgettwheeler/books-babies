@@ -37,7 +37,7 @@ function App() {
             <Books user={user} />
           </Route>
           <Route path="/profile">
-            <Profile user={user} />
+            <Profile user={user} setUser={setUser} />
           </Route>
           <Route path="/">
             <Schedule user={user}/>

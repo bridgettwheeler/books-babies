@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useHistory, useParams, Redirect } from "react-router";
 import styled from "styled-components";
 import { Button, Error, FormField, Input, Label, Textarea } from "../styles";
 
@@ -38,6 +38,10 @@ const EditAppointmentForm = ({ user }) => {
         
       })
   }
+
+  const userAppointmentIds = user.appointments.map(app => app.id)
+
+  if (!userAppointmentIds.includes(parseInt(id))) return <Redirect to="/" />
 
   return (
     <Wrapper>

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
+    delete "/users/:id", to: "users#destroy"
     post "/create-book-appointment", to: "appointments#create"
     end
   # all other routes will be load our React application
