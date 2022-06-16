@@ -7,6 +7,10 @@ class Api::BooksController < ApplicationController
         book = @current_user.books.create!(book_params)
         render json: book, status: :created
       end
+
+    def order
+      render json: Book.order(:title)
+    end
     
       private
     

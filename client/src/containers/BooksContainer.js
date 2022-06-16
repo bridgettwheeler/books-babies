@@ -13,9 +13,21 @@ const BooksContainer = ({user}) => {
       }, []);
 
 
+const handleClick = (e) => {
+    e.preventDefault();
+    fetch("/api/order-books")
+        .then(resp => resp.json())
+            .then(data => {
+                setBooks(data)
+              })
+}
+    
+
   return (
     <div>
+        <button onClick={handleClick}> Order by title</button>
         <BooksList user={user} books={books} />
+        
     </div>
   )
 }

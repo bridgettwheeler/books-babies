@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     delete "/logout", to: "sessions#destroy"
     delete "/users/:id", to: "users#destroy"
     post "/create-book-appointment", to: "appointments#create"
+    get "/order-books", to: "books#order"
     end
   # all other routes will be load our React application
   # this route definition matches:
